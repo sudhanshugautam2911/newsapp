@@ -33,15 +33,20 @@ export default class News extends Component {
     document.title = `${this.capitalizeFirstLetter(this.props.category)} In-Depth News`;
   }
   async updateNews() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d7b26bbab6084d12aac1148133bb9153&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    this.props.setProgress(10);
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
+    this.props.setProgress(30);
     let parsedData = await data.json();
+    this.props.setProgress(70);
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
       loading: false,
     })
+    this.props.setProgress(100);
+
   }
   // it always run after render
   async componentDidMount() {
@@ -63,7 +68,7 @@ export default class News extends Component {
         page: this.state.page + 1
       })
 
-      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d7b26bbab6084d12aac1148133bb9153&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
       let data = await fetch(url);
       let parsedData = await data.json();
       this.setState({
@@ -90,7 +95,7 @@ export default class News extends Component {
           <div className="container my-3" style={{padding: "0px 50px"}}>
             <div className='row'>
               {this.state.articles.map((element,index) => {
-                return <div className='' key={{index}}>
+                return <div className='' key={index}>
                   <NewsList mode={this.props.mode} title={element.title} description={element.description} newsurl={element.url} imageUrl={element.urlToImage} source={element.source.name} date={element.publishedAt} author={element.author} />
                 </div>
               })}

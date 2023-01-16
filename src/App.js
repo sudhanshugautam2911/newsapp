@@ -8,6 +8,7 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import LoadingBar from 'react-top-loading-bar'
 
 export default class App extends Component {
 
@@ -40,22 +41,33 @@ export default class App extends Component {
     }
   }
 
+  state = {
+    progress:0
+  }
+  setProgress = (progress) =>{
+    this.setState({progress: progress})
+  }
 
   pageSize = 6;
+  apiKey = 'd7b26bbab6084d12aac1148133bb9153';
   render() {
     return (
       <div>
         <Router>
-          <Navbar mode={this.state.mode} toggleMode={this.toggleMode}/>
+          <Navbar mode={this.state.mode} toggleMode={this.toggleMode} />
+          <LoadingBar
+            color='#f11946'
+            progress={this.state.progress}
+          />
           <Routes>
-            <Route path='/' element={<News mode={this.state.mode} key='general' pageSize={this.pageSize}  country='in' category='general' />}></Route>
-            <Route path='/general' element={<News mode={this.state.mode} key='general' pageSize={this.pageSize} country='in' category='general' />}></Route>
-            <Route path='/business' element={<News mode={this.state.mode} key='business' pageSize={this.pageSize} country='in' category='business' />}></Route>
-            <Route path='/entertainment' element={<News mode={this.state.mode} key='entertainment' pageSize={this.pageSize} country='in' category='entertainment' />}></Route>
-            <Route path='/health' element={<News mode={this.state.mode} key='health' pageSize={this.pageSize} country='in' category='health' />}></Route>
-            <Route path='/science' element={<News mode={this.state.mode} key='science' pageSize={this.pageSize} country='in' category='science' />}></Route>
-            <Route path='/sports' element={<News mode={this.state.mode} key='sports' pageSize={this.pageSize} country='in' category='sports' />}></Route>
-            <Route path='/technology' element={<News mode={this.state.mode} key='technology' pageSize={this.pageSize} country='in' category='technology' />}></Route>
+            <Route path='/' element={<News setProgress={this.setProgress} apiKey={this.apiKey} mode={this.state.mode} key='general' pageSize={this.pageSize} country='in' category='general' />}></Route>
+            <Route path='/general' element={<News setProgress={this.setProgress} apiKey={this.apiKey} mode={this.state.mode} key='general' pageSize={this.pageSize} country='in' category='general' />}></Route>
+            <Route path='/business' element={<News setProgress={this.setProgress} apiKey={this.apiKey} mode={this.state.mode} key='business' pageSize={this.pageSize} country='in' category='business' />}></Route>
+            <Route path='/entertainment' element={<News setProgress={this.setProgress} apiKey={this.apiKey} mode={this.state.mode} key='entertainment' pageSize={this.pageSize} country='in' category='entertainment' />}></Route>
+            <Route path='/health' element={<News setProgress={this.setProgress} apiKey={this.apiKey} mode={this.state.mode} key='health' pageSize={this.pageSize} country='in' category='health' />}></Route>
+            <Route path='/science' element={<News setProgress={this.setProgress} apiKey={this.apiKey} mode={this.state.mode} key='science' pageSize={this.pageSize} country='in' category='science' />}></Route>
+            <Route path='/sports' element={<News setProgress={this.setProgress} apiKey={this.apiKey} mode={this.state.mode} key='sports' pageSize={this.pageSize} country='in' category='sports' />}></Route>
+            <Route path='/technology' element={<News setProgress={this.setProgress} apiKey={this.apiKey} mode={this.state.mode} key='technology' pageSize={this.pageSize} country='in' category='technology' />}></Route>
             {/* key has to be given so otherwise it wont work, key basically tell react that this component is unique */}
           </Routes>
         </Router>
