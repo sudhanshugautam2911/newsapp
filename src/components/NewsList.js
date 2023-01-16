@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class NewsList extends Component {
-    render() {
-        let { title, description, imageUrl, newsurl, source, author, date } = this.props
+const NewsList = (props) => {
+  
+        let { title, description, imageUrl, newsurl, source, author, date } = props
         return (
             // <div className='my-3'>
             //     <div className="card" style={{ borderColor: '#e8e6e3'}}>
@@ -15,9 +15,9 @@ export default class NewsList extends Component {
             //         </span>
 
             //         {/* Content inside the card */}
-            //         <div className="card-body" style={{ backgroundColor: this.props.mode === 'light' ? 'white' : '#0f0f0f' }}>
-            //             <h5 className="card-title" style={{ color: this.props.mode === 'light' ? '#0f0f0f' : '#e8e6e3' }}>{title}</h5>
-            //             <p className="card-text" style={{ color: this.props.mode === 'light' ? '#0f0f0f' : '#e8e6e3' }}>{description}...</p>
+            //         <div className="card-body" style={{ backgroundColor: props.mode === 'light' ? 'white' : '#0f0f0f' }}>
+            //             <h5 className="card-title" style={{ color: props.mode === 'light' ? '#0f0f0f' : '#e8e6e3' }}>{title}</h5>
+            //             <p className="card-text" style={{ color: props.mode === 'light' ? '#0f0f0f' : '#e8e6e3' }}>{description}...</p>
             //             <p className="card-text"><small className="text-muted">By {author} at {new Date(date).toGMTString()}</small></p>
             //             <a href={newsurl} target="_blank" rel="noreferrer" className="btn btn-sm btn-primary">Read More</a>
             //         </div>
@@ -27,18 +27,18 @@ export default class NewsList extends Component {
             // 2nd 
             <div className="card mb-3 shadow" >
                 <div className="row g-0">
-                    <div className="col-md-4" style={{ backgroundColor: this.props.mode === 'light' ? 'white' : '#0f0f0f' }}>
+                    <div className="col-md-4" style={{ backgroundColor: props.mode === 'light' ? 'white' : '#0f0f0f' }}>
                         <img src={imageUrl ? imageUrl : "https://thumbs.dreamstime.com/b/news-newspapers-folded-stacked-word-wooden-block-puzzle-dice-concept-newspaper-media-press-release-42301371.jpg"} className="card-img-top" alt="..." height={"268px"} width={"320"} />
                         {/* <img src="..." className="img-fluid rounded-start" alt="..." /> */}
                         <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger" style={{left: "90%", zIndex:1}}>
                         {source}
                     </span> 
                     </div>
-                    <div className="col-md-8" style={{ backgroundColor: this.props.mode === 'light' ? 'white' : '#0f0f0f' }}>
+                    <div className="col-md-8" style={{ backgroundColor: props.mode === 'light' ? 'white' : '#0f0f0f' }}>
                         <div className="card-body" >
                             <div className="card-body" >
-                                <h5 className="card-title" style={{ color: this.props.mode === 'light' ? '#44444d' : '#e8e6e3' }}>{title}</h5>
-                                <p className="card-text" style={{ color: this.props.mode === 'light' ? '#44444d' : '#e8e6e3' }}>{description}...</p>
+                                <h5 className="card-title" style={{ color: props.mode === 'light' ? '#44444d' : '#e8e6e3' }}>{title}</h5>
+                                <p className="card-text" style={{ color: props.mode === 'light' ? '#44444d' : '#e8e6e3' }}>{description}...</p>
                                 <p className="card-text"><small className="text-muted">By {author?author:"Unknow"} at {new Date(date).toGMTString()}</small></p>
                                 <a href={newsurl} target="_blank" rel="noreferrer" className="btn btn-sm btn-primary">Read More</a>
                             </div>
@@ -47,8 +47,9 @@ export default class NewsList extends Component {
                 </div>
             </div>
         )
-    }
 }
+
+export default NewsList
 
 // {new Date(date).toGMTString()}
 // #0f0f0f , new #44444d --> black color
